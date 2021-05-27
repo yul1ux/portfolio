@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Sidebar */
+.navbar .menu-item {
+  color: #fff;
+}
+
+.navbar .menu-item :hover {
+  color: rgba(209, 209, 209, 0.993);
+}
+
+.navbar .seleted {
+  color: #fff;
+  font-size: 16px;
+}
+
+.home {
+  background: #f6f6f6;
+  height: 100vh;
+  padding: 50px;
+}
+
+.home .hello {
+  font-size: 50px;
+  text-align: left;
+  color: #1890ff;
+}
+
+.home .text {
+  font-size: 30px;
+}
+
+.home .home-btn {
+  background: #343090;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 15px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.home .home-btn:hover {
+  background: #1890ff;
+}
+
+.home .home-btn a {
+  color: white;
+}
+
+.social {
+  position: absolute;
+  right: 0;
+  background: #f6f6f6;
+}
+
+.social a {
+  color: #2d3032;
+  font-size: 30px;
+  margin: 10px;
+}
+
+.social :hover {
+  color: #1890ff;
+}
+
+.about {
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+.about .profile__about {
+  width: 400px;
+  margin: 20px 30px;
+}
+
+.about .about-content {
+  margin: 30px;
+  padding: 20px;
+}
+
+.about .about-content .about-header, .about .about-content .service .service-header, .about .service .about-content .service-header {
+  font-size: 30px;
+  color: #141414;
+}
+
+.about .service .service-header {
+  text-align: center;
+}
+/*# sourceMappingURL=App.css.map */

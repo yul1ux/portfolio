@@ -1,0 +1,90 @@
+$main-color: #1890ff;
+$sidebar-color: #343090;
+$content-bg: rgb(246, 246, 246);
+
+body {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+/* Sidebar */
+
+.navbar {
+  .menu-item {
+    color: #fff;
+    :hover {
+      color: rgba(209, 209, 209, 0.993);
+    }
+  }
+  .seleted {
+    color: #fff;
+    font-size: 16px;
+  }
+}
+.home {
+  background: $content-bg;
+  height: 100vh;
+  padding: 50px;
+  .hello {
+    font-size: 50px;
+    text-align: left;
+    color: #1890ff;
+  }
+  .text {
+    font-size: 30px;
+  }
+  .home-btn {
+    background: $sidebar-color;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    :hover {
+      background: $main-color;
+    }
+    a {
+      color: white;
+    }
+    
+  }
+}
+.social {
+  position: absolute;
+  right: 0;
+  background: $content-bg;
+  a {
+    color: #2d3032;
+    font-size: 30px;
+    margin: 10px;
+  }
+  :hover {
+    color: $main-color;
+  }
+}
+.about{
+  background: $content-bg;
+  min-height: 100vh;
+  .profile__about{
+  width:400px;
+  margin:20px 30px;
+}
+ .about-content{
+   margin:30px;
+   padding: 20px;
+   .about-header{
+     font-size: 30px;
+     color:rgb(20, 20, 20);
+   }
+ }
+ .service{
+   .service-header{
+    @extend .about-header;
+    text-align:center;
+   }
+ }
+}
+ 
