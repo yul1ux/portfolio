@@ -1,0 +1,37 @@
+﻿---
+import type { CollectionEntry } from 'astro:content';
+import {
+  formatBlogDate,
+  getBlogPostPath,
+  getReadingTime,
+} from '../../utils/blog';
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
+const minutes = getReadingTime(post.body);
+---
+
+<article class="border-b border-black/10 py-8 dark:border-white/10">
+  <div class="font-mono-tech text-xs text-black/60 dark:text-white/50">
+    <time datetime={post.data.pubDate.toISOString()}>
+      {formatBlogDate(post.data.pubDate)}
+    </time>
+    <span> · {minutes} min read</span>
+  </div>
+  <h2 class="mt-3 font-serif-editorial text-3xl">
+    <a href={getBlogPostPath(post.id)} class="accent-hover">
+      {post.data.title}
+    </a>
+  </h2>
+  <p class="mt-2 text-sm leading-relaxed text-black/70 dark:text-white/70">
+    {post.data.description}
+  </p>
+  {post.data.tags.length > 0 && (
+    <ul class="mt-3 flex flex-wrap gap-2 font-mono-tech text-xs accent-copy">
+      {post.data.tags.map((tag) => (
+        <li>#{tag}</li>
+      ))}
+    </ul>
+  )}
+</article>

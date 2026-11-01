@@ -1,0 +1,174 @@
+﻿---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  ogImage?: string;
+  ogImageAlt?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+const {
+  title,
+  description,
+  canonical: suppliedCanonical,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  ogImage,
+  ogImageAlt,
+  structuredData,
+} = Astro.props;
+const canonical =
+  suppliedCanonical ??
+  (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined);
+const serializedStructuredData = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, '\\u003c')
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    />
+    <meta name="generator" content={Astro.generator} />
+    {Astro.site && (
+      <link
+        rel="sitemap"
+        href={new URL('sitemap-index.xml', Astro.site).href}
+      />
+    )}
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content={ogType} />
+    <meta
+      name="twitter:card"
+      content={ogImage ? 'summary_large_image' : 'summary'}
+    />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    {ogImage && (
+      <>
+        <meta property="og:image" content={ogImage} />
+        {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+        <meta name="twitter:image" content={ogImage} />
+        {ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
+      </>
+    )}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {publishedTime && (
+      <meta
+        property="article:published_time"
+        content={publishedTime.toISOString()}
+      />
+    )}
+    {modifiedTime && (
+      <meta
+        property="article:modified_time"
+        content={modifiedTime.toISOString()}
+      />
+    )}
+    {serializedStructuredData && (
+      <script type="application/ld+json" set:html={serializedStructuredData} />
+    )}
+    <slot name="head" />
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-[#F5F4EF] focus:px-4 focus:py-3 focus:text-[#171717] focus:outline focus:outline-2 focus:outline-[#C45533]"
+    >
+      Skip to main content
+    </a>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  .prose {
+    max-width: 72ch;
+    line-height: 1.75;
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    line-height: 1.2;
+    margin: 2em 0 0.75em;
+  }
+  .prose p,
+  .prose ul,
+  .prose ol,
+  .prose blockquote,
+  .prose pre,
+  .prose table {
+    margin: 1.25em 0;
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5em;
+  }
+  .prose ul {
+    list-style: disc;
+  }
+  .prose ol {
+    list-style: decimal;
+  }
+  .prose a {
+    color: #b8472a;
+    text-decoration: underline;
+  }
+  .dark .prose a {
+    color: #e27a58;
+  }
+  .prose blockquote {
+    border-left: 2px solid #c45533;
+    padding-left: 1em;
+    opacity: 0.8;
+  }
+  .prose pre {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 1em;
+    background: #171717;
+    color: #e5e4df;
+    -webkit-overflow-scrolling: touch;
+  }
+  .prose code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .prose :not(pre) > code {
+    padding: 0.1em 0.3em;
+    background: rgb(0 0 0 / 8%);
+    overflow-wrap: anywhere;
+  }
+  .prose img {
+    max-width: 100%;
+    height: auto;
+  }
+  .prose table {
+    display: block;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .prose th,
+  .prose td {
+    border: 1px solid rgb(0 0 0 / 20%);
+    padding: 0.5em 0.75em;
+    text-align: left;
+  }
+</style>

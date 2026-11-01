@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+import { caseStudies } from '../../data/portfolio';
+---
+
+<section id="works" class="space-y-12">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline font-mono-tech text-xs uppercase tracking-widest text-black/60 dark:text-white/50 border-b border-black/10 dark:border-white/10 pb-4">
+    <h2 class="md:col-span-3">04 / SELECTED WORKS</h2>
+    <div class="md:col-span-9">ARCHITECTURAL CASE STUDIES</div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {caseStudies.map((study) =>
+      study.layout === 'wide' ? (
+        <article class="border border-black/10 dark:border-white/10 bg-[#EFECE6]/50 dark:bg-[#161615]/50 p-8 space-y-6 flex flex-col justify-between hover:border-[#C45533] transition-colors duration-300 md:col-span-2">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div class="md:col-span-8 space-y-4">
+              <div class="flex justify-between items-center font-mono-tech text-xs text-black/60 dark:text-white/50">
+                <span>CASE STUDY // {study.id}</span>
+                <span>{study.category}</span>
+              </div>
+              <h3 class="font-serif-editorial text-3xl md:text-4xl">
+                {study.title}
+              </h3>
+              <p class="text-sm text-black/70 dark:text-white/70 leading-relaxed max-w-2xl">
+                {study.description}
+              </p>
+            </div>
+            <div class="md:col-span-4 p-6 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 font-mono-tech text-xs space-y-3">
+              <div class="accent-copy font-semibold">METRICS AT A GLANCE:</div>
+              <div class="flex justify-between">
+                <span>INGESTION:</span>
+                <span class="font-bold">{study.metrics?.ingestion}</span>
+              </div>
+              <div class="flex justify-between">
+                <span>MTTD REDUCTION:</span>
+                <span class="font-bold">{study.metrics?.mttdReduction}</span>
+              </div>
+              <div class="flex justify-between">
+                <span>COST EFFICIENCY:</span>
+                <span class="font-bold">{study.metrics?.costEfficiency}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-black/10 dark:border-white/10 flex justify-between items-center">
+            <div class="font-mono-tech text-xs text-black/60 dark:text-white/60">
+              STACK: {study.technologyStack}
+            </div>
+            <div class="font-mono-tech text-xs accent-copy flex items-center gap-1 font-medium">
+              {study.actionLabel}{' '}
+              <Icon name="arrow-up-right" className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        </article>
+      ) : (
+        <article class="border border-black/10 dark:border-white/10 bg-[#EFECE6]/50 dark:bg-[#161615]/50 p-8 space-y-6 flex flex-col justify-between hover:border-[#C45533] transition-colors duration-300">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center font-mono-tech text-xs text-black/60 dark:text-white/50">
+              <span>CASE STUDY // {study.id}</span>
+              <span>{study.category}</span>
+            </div>
+            <h3 class="font-serif-editorial text-3xl">{study.title}</h3>
+            <p class="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+              {study.description}
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-black/10 dark:border-white/10 space-y-4">
+            <div class="font-mono-tech text-xs space-y-1">
+              <div class="text-black/60 dark:text-white/50">TECH STACK:</div>
+              <div class="text-black/80 dark:text-white/80">
+                {study.technologyStack}
+              </div>
+            </div>
+            <div class="font-mono-tech text-xs accent-copy flex items-center gap-1 font-medium">
+              {study.actionLabel}{' '}
+              <Icon name="arrow-up-right" className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        </article>
+      ),
+    )}
+  </div>
+</section>

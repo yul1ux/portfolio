@@ -1,0 +1,55 @@
+﻿---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import About from '../components/home/About.astro';
+import Arsenal from '../components/home/Arsenal.astro';
+import Contact from '../components/home/Contact.astro';
+import Experience from '../components/home/Experience.astro';
+import Footer from '../components/home/Footer.astro';
+import Header from '../components/home/Header.astro';
+import Hero from '../components/home/Hero.astro';
+import Works from '../components/home/Works.astro';
+import TerminalPanel from '../components/interactive/TerminalPanel';
+const description =
+  'Architecting resilient cloud environments, deterministic pipelines, and self-healing infrastructure with quiet precision.';
+const siteUrl = Astro.site?.href;
+const structuredData = siteUrl
+  ? [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'SOE THIHA — CLOUD ENGINEER',
+        url: siteUrl,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Soe Thiha',
+        jobTitle: 'Cloud Engineer',
+        url: siteUrl,
+      },
+    ]
+  : undefined;
+---
+
+<SiteLayout
+  title="SOE THIHA — CLOUD ENGINEER"
+  description={description}
+  structuredData={structuredData}
+>
+  <div class="min-h-screen transition-colors duration-500 font-sans selection:bg-[#C45533] selection:text-white bg-[#F5F4EF] text-[#171717] dark:bg-[#121211] dark:text-[#E5E4DF]">
+    <Header />
+    <TerminalPanel client:load />
+    <main
+      id="main-content"
+      class="pt-24 pb-20 px-6 max-w-7xl mx-auto space-y-32"
+    >
+      <Hero />
+      <About />
+      <Arsenal />
+      <Works />
+      <Experience />
+      <Contact />
+    </main>
+    <Footer />
+  </div>
+</SiteLayout>

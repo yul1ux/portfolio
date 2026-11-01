@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import ThemeToggle from '../interactive/ThemeToggle';
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur-md bg-[#F5F4EF]/80 dark:bg-[#121211]/80 transition-colors duration-500">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between font-mono-tech text-xs tracking-wider">
+    <div class="flex items-center space-x-3">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#C45533] animate-pulse"></span>
+      <span class="font-semibold uppercase tracking-widest text-sm">
+        SOE THIHA
+      </span>
+      <span class="hidden sm:inline text-black/60 dark:text-white/60">/</span>
+      <span class="hidden sm:inline text-black/60 dark:text-white/60">
+        CLOUD ENGINEER
+      </span>
+    </div>
+
+    <div class="flex items-center space-x-6">
+      <nav
+        aria-label="Primary navigation"
+        class="hidden md:flex items-center space-x-6 text-black/60 dark:text-white/60"
+      >
+        <a href="#about" class="accent-hover transition-colors">
+          02. ABOUT
+        </a>
+        <a href="#arsenal" class="accent-hover transition-colors">
+          03. ARSENAL
+        </a>
+        <a href="#works" class="accent-hover transition-colors">
+          04. WORKS
+        </a>
+        <a href="#log" class="accent-hover transition-colors">
+          05. LOGS
+        </a>
+      </nav>
+
+      <button
+        type="button"
+        data-terminal-toggle
+        aria-label="Toggle Cloud Terminal"
+        aria-controls="cloud-terminal"
+        aria-expanded="false"
+        class="px-2.5 py-1 border border-black/20 dark:border-white/20 hover:border-[#C45533] dark:hover:border-[#C45533] transition-colors flex items-center gap-1.5"
+        title="Toggle Cloud Terminal"
+      >
+        <Icon name="terminal" className="w-3.5 h-3.5 text-[#C45533]" />
+        <span class="hidden xs:inline">CLI</span>
+      </button>
+
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</header>

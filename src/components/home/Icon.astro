@@ -1,0 +1,73 @@
+---
+interface Props {
+  name:
+    'arrow-up-right' | 'cloud' | 'layers' | 'network' | 'server' | 'terminal';
+  className: string;
+}
+
+const { name, className } = Astro.props;
+const classValue =
+  name === 'cloud' ? className : `lucide lucide-${name} ${className}`;
+---
+
+{name === 'cloud' ? (
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class={classValue}
+  >
+    <path d="M17.5 19px" />
+    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+  </svg>
+) : (
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class={classValue}
+  >
+    {name === 'arrow-up-right' && <path d="M7 7h10v10" />}
+    {name === 'arrow-up-right' && <path d="M7 17 17 7" />}
+    {name === 'layers' && (
+      <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+    )}
+    {name === 'layers' && (
+      <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+    )}
+    {name === 'layers' && (
+      <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+    )}
+    {name === 'network' && <rect x="16" y="16" width="6" height="6" rx="1" />}
+    {name === 'network' && <rect x="2" y="16" width="6" height="6" rx="1" />}
+    {name === 'network' && <rect x="9" y="2" width="6" height="6" rx="1" />}
+    {name === 'network' && (
+      <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+    )}
+    {name === 'network' && <path d="M12 12V8" />}
+    {name === 'server' && (
+      <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+    )}
+    {name === 'server' && (
+      <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+    )}
+    {name === 'server' && <line x1="6" x2="6.01" y1="6" y2="6" />}
+    {name === 'server' && <line x1="6" x2="6.01" y1="18" y2="18" />}
+    {name === 'terminal' && <polyline points="4 17 10 11 4 5" />}
+    {name === 'terminal' && <line x1="12" x2="20" y1="19" y2="19" />}
+  </svg>
+)}
