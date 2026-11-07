@@ -108,6 +108,17 @@ const serializedStructuredData = structuredData
     line-height: 1.2;
     margin: 2em 0 0.75em;
   }
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+  .prose h2 {
+    font-size: 1.875rem;
+  }
+  .prose h3 {
+    font-size: 1.5rem;
+  }
   .prose p,
   .prose ul,
   .prose ol,
@@ -119,6 +130,9 @@ const serializedStructuredData = structuredData
   .prose ul,
   .prose ol {
     padding-left: 1.5em;
+  }
+  .prose li {
+    margin: 0.5em 0;
   }
   .prose ul {
     list-style: disc;
@@ -135,8 +149,13 @@ const serializedStructuredData = structuredData
   }
   .prose blockquote {
     border-left: 2px solid #c45533;
+    background: rgb(0 0 0 / 4%);
     padding-left: 1em;
+    padding-block: 0.25em;
     opacity: 0.8;
+  }
+  .dark .prose blockquote {
+    background: rgb(255 255 255 / 4%);
   }
   .prose pre {
     max-width: 100%;

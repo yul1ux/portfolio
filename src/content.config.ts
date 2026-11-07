@@ -12,7 +12,7 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       tags: z.array(z.string().min(1).regex(/\S/)).default([]),
       draft: z.boolean().default(false),
-      coverImage: z.url().optional(),
+      coverImage: z.union([z.url(), z.string().regex(/^\/(?!\/)/)]).optional(),
       coverImageAlt: z.string().min(1).regex(/\S/).optional(),
     })
     .superRefine((data, context) => {

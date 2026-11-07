@@ -25,6 +25,10 @@ const { Content } = await render(post);
 const canonical = Astro.site
   ? new URL(getBlogPostPath(post.id), Astro.site).href
   : undefined;
+const coverImageUrl =
+  post.data.coverImage && Astro.site
+    ? new URL(post.data.coverImage, Astro.site).href
+    : post.data.coverImage;
 const articleStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -38,7 +42,7 @@ const articleStructuredData = {
     '@type': 'Person',
     name: 'Soe Thiha',
   },
-  ...(post.data.coverImage && { image: post.data.coverImage }),
+  ...(coverImageUrl && { image: coverImageUrl }),
   ...(canonical && { mainEntityOfPage: canonical }),
 };
 ---
@@ -50,95 +54,99 @@ const articleStructuredData = {
   ogType="article"
   publishedTime={post.data.pubDate}
   modifiedTime={post.data.updatedDate}
-  ogImage={post.data.coverImage}
+  ogImage={coverImageUrl}
   ogImageAlt={post.data.coverImageAlt}
   structuredData={articleStructuredData}
 >
-  <main id="main-content" class="mx-auto min-h-screen max-w-3xl px-6 py-16">
-    <article>
-      <nav
-        aria-label="Breadcrumb"
-        class="mb-8 font-mono-tech text-xs text-black/60 dark:text-white/50"
-      >
-        <a href="/" class="accent-hover">
-          SOE THIHA
-        </a>
-        <span aria-hidden="true"> / </span>
-        <a href="/blog/" class="accent-hover">
-          LOGS
-        </a>
-        <span aria-hidden="true"> / </span>
-        <span aria-current="page" class="text-black/70 dark:text-white/70">
-          {post.data.title}
-        </span>
-      </nav>
-      <header class="mb-10 border-b border-black/10 pb-6 dark:border-white/10">
-        <div class="font-mono-tech text-xs uppercase tracking-widest text-black/60 dark:text-white/50">
-          <time datetime={post.data.pubDate.toISOString()}>
-            LOG / {formatBlogDate(post.data.pubDate)}
-          </time>
-          {post.data.updatedDate && (
-            <p class="mt-2 normal-case tracking-normal">
-              Updated{' '}
-              <time datetime={post.data.updatedDate.toISOString()}>
-                {formatBlogDate(post.data.updatedDate)}
-              </time>
-            </p>
+  <div class="min-h-screen bg-[#F5F4EF] text-[#171717] transition-colors duration-500 dark:bg-[#121211] dark:text-[#E5E4DF]">
+    <main id="main-content" class="mx-auto min-h-screen max-w-3xl px-6 py-16">
+      <article>
+        <nav
+          aria-label="Breadcrumb"
+          class="mb-8 font-mono-tech text-xs text-black/60 dark:text-white/50"
+        >
+          <a href="/" class="accent-hover">
+            SOE THIHA
+          </a>
+          <span aria-hidden="true"> / </span>
+          <a href="/blog/" class="accent-hover">
+            LOGS
+          </a>
+          <span aria-hidden="true"> / </span>
+          <span aria-current="page" class="text-black/70 dark:text-white/70">
+            {post.data.title}
+          </span>
+        </nav>
+        <header class="mb-10 border-b border-black/10 pb-6 dark:border-white/10">
+          <div class="font-mono-tech text-xs uppercase tracking-widest text-black/60 dark:text-white/50">
+            <time datetime={post.data.pubDate.toISOString()}>
+              LOG / {formatBlogDate(post.data.pubDate)}
+            </time>
+            {post.data.updatedDate && (
+              <p class="mt-2 normal-case tracking-normal">
+                Updated{' '}
+                <time datetime={post.data.updatedDate.toISOString()}>
+                  {formatBlogDate(post.data.updatedDate)}
+                </time>
+              </p>
+            )}
+          </div>
+          <h1 class="mt-4 font-serif-editorial text-4xl leading-tight sm:text-5xl">
+            {post.data.title}
+          </h1>
+          <p class="mt-4 text-black/70 dark:text-white/70">
+            {post.data.description}
+          </p>
+          <p class="mt-4 font-mono-tech text-xs text-black/60 dark:text-white/50">
+            {getReadingTime(post.body)} min read
+          </p>
+          {post.data.tags.length > 0 && (
+            <ul class="mt-4 flex flex-wrap gap-2 font-mono-tech text-xs accent-copy">
+              {post.data.tags.map((tag) => (
+                <li>#{tag}</li>
+              ))}
+            </ul>
           )}
-        </div>
-        <h1 class="mt-4 font-serif-editorial text-5xl">{post.data.title}</h1>
-        <p class="mt-4 text-black/70 dark:text-white/70">
-          {post.data.description}
-        </p>
-        <p class="mt-4 font-mono-tech text-xs text-black/60 dark:text-white/50">
-          {getReadingTime(post.body)} min read
-        </p>
-        {post.data.tags.length > 0 && (
-          <ul class="mt-4 flex flex-wrap gap-2 font-mono-tech text-xs accent-copy">
-            {post.data.tags.map((tag) => (
-              <li>#{tag}</li>
-            ))}
-          </ul>
+        </header>
+        {post.data.coverImage && (
+          <img
+            class="mb-10 h-auto w-full border border-black/10 dark:border-white/10"
+            src={post.data.coverImage}
+            alt={post.data.coverImageAlt}
+          />
         )}
-      </header>
-      {post.data.coverImage && (
-        <img
-          class="mb-10 h-auto w-full"
-          src={post.data.coverImage}
-          alt={post.data.coverImageAlt}
-        />
-      )}
-      <div class="prose">
-        <Content />
-      </div>
-      <nav
-        aria-label="Article navigation"
-        class="mt-12 flex flex-col gap-4 border-t border-black/10 pt-6 font-mono-tech text-xs dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
-      >
-        <a href="/blog/" class="accent-copy hover:underline">
-          ← Back to logs
-        </a>
-        <div class="flex flex-wrap gap-x-6 gap-y-3 sm:justify-end">
-          {newerPost && (
-            <a
-              href={getBlogPostPath(newerPost.id)}
-              rel="prev"
-              class="accent-copy hover:underline"
-            >
-              Newer: {newerPost.data.title}
-            </a>
-          )}
-          {olderPost && (
-            <a
-              href={getBlogPostPath(olderPost.id)}
-              rel="next"
-              class="accent-copy hover:underline"
-            >
-              Older: {olderPost.data.title}
-            </a>
-          )}
+        <div class="prose">
+          <Content />
         </div>
-      </nav>
-    </article>
-  </main>
+        <nav
+          aria-label="Article navigation"
+          class="mt-12 flex flex-col gap-4 border-t border-black/10 pt-6 font-mono-tech text-xs dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <a href="/blog/" class="accent-copy hover:underline">
+            ← Back to logs
+          </a>
+          <div class="flex flex-wrap gap-x-6 gap-y-3 sm:justify-end">
+            {newerPost && (
+              <a
+                href={getBlogPostPath(newerPost.id)}
+                rel="prev"
+                class="accent-copy hover:underline"
+              >
+                Newer: {newerPost.data.title}
+              </a>
+            )}
+            {olderPost && (
+              <a
+                href={getBlogPostPath(olderPost.id)}
+                rel="next"
+                class="accent-copy hover:underline"
+              >
+                Older: {olderPost.data.title}
+              </a>
+            )}
+          </div>
+        </nav>
+      </article>
+    </main>
+  </div>
 </SiteLayout>
