@@ -3,13 +3,7 @@ import astro from 'eslint-plugin-astro';
 
 export default tseslint.config(
   {
-    ignores: [
-      'dist/**',
-      '.astro/**',
-      'node_modules/**',
-      '.tools/**',
-      '.pnpm-store/**',
-    ],
+    ignores: ['dist/**', '.astro/**', 'node_modules/**'],
   },
   ...tseslint.configs.recommended,
   ...astro.configs['flat/recommended'],

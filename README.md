@@ -1,47 +1,133 @@
 ﻿# Soe Thiha portfolio
 
-Astro renders the static portfolio and Markdown blog. Small React islands preserve the theme, terminal, and email-copy controls.
+This is a static personal portfolio and blog built with Astro, React, TypeScript, and Tailwind CSS. It uses a static build output and keeps the design consistent with the current live site.
 
-## Required tools
+## Technology stack
 
-The project uses Node.js 24.22.1 LTS and pnpm 10.34.9, pinned in the project manifest. `scripts/setup.cmd` places the runtime and Corepack cache under the ignored `.tools/` folder; it does not change global PATH or execution policy. The bootstrap uses the matching Node runtime bundled with Codex when available, otherwise downloads the official Node archive and verifies its SHA-256 checksum.
+- Node.js 26.13.0
+- pnpm 12.18.0
+- Astro 7.4.7
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Cloudflare Pages for production hosting
 
-## Environment setup
+## Prerequisites
 
-Run these commands from the project root in Command Prompt or PowerShell:
+Install Node.js 26.13.0 and pnpm 12.18.0 locally.
 
-```powershell
-Copy-Item .env.example .env
-.\scripts\setup.cmd
+```bash
+node --version
+pnpm --version
 ```
 
-The setup command installs the pinned pnpm release through local Corepack, then installs dependencies. The project had no lockfile, so the first successful install creates `pnpm-lock.yaml`. Subsequent setup runs install from that lockfile in frozen mode.
+Use the standard package manager installation path; do not use repo-local tool wrappers.
 
-Verify that the project-local tools are active:
+## Install dependencies
 
-```powershell
-.\scripts\node.cmd --version
-.\scripts\pnpm.cmd --version
+```bash
+pnpm install --frozen-lockfile
 ```
 
-## Development commands
+The pnpm release-age protection remains enabled at its default 24-hour window. The overrides in `pnpm-workspace.yaml` keep Astro's compatible `satteri`, `tinyps`, and Volar dependencies on versions old enough to pass that policy. The development dependencies pin a matching stable `@emnapi` 1.x core/runtime pair for Astro's WASM tooling instead of allowing an incompatible beta peer combination.
 
-```powershell
-.\scripts\pnpm.cmd dev
-.\scripts\pnpm.cmd check
-.\scripts\pnpm.cmd lint
-.\scripts\pnpm.cmd format
-.\scripts\pnpm.cmd format:check
-.\scripts\pnpm.cmd build
-.\scripts\pnpm.cmd preview
+## Development
+
+```bash
+pnpm dev
 ```
 
-The development server defaults to `http://localhost:4321`.
+The app runs at `http://localhost:4321` by default.
+
+## Type checking, linting, formatting
+
+```bash
+pnpm check
+pnpm lint
+pnpm format:check
+```
+
+## Production build
+
+```bash
+pnpm build
+pnpm preview
+```
+
+The build output is generated in `dist/`.
 
 ## Environment variables
 
-`SITE_URL` is optional in development and defaults to `http://localhost:4321`. Set it to the deployed HTTPS origin in `.env` or the production build environment to generate production canonical URLs and the sitemap. A localhost URL is excluded from sitemap generation.
+The project uses `SITE_URL` for canonical URLs and sitemap generation.
 
-## Blog posts
+- Local development: leave unset to default to `http://localhost:4321`
+- Production: set `SITE_URL=https://yuliux.pages.dev` before building or in the deployment environment
 
-Add Markdown files under `src/content/blog/`. Frontmatter is validated in `src/content.config.ts` and accepts `title`, `description`, `pubDate`, optional `updatedDate`, `tags`, optional `draft` (defaults to `false`), and an optional absolute `coverImage` URL. Draft posts are omitted from the listing and generated public routes. The listing is at `/blog/`; published files generate routes from their filenames. Markdown code fences use Shiki highlighting.
+Use the sample file at `.env.example`.
+
+## Blog content
+
+Add markdown files under `src/content/blog/`.
+
+The frontmatter schema in `src/content.config.ts` supports:
+
+- `title`
+- `description`
+- `pubDate`
+- optional `updatedDate`
+- optional `tags`
+- optional `draft` (defaults to `false`)
+- optional absolute `coverImage` URL
+
+Draft posts are omitted from the listing and public routes.
+
+## Project structure
+
+```text
+.
+├── src/
+│   ├── components/
+│   ├── content.config.ts
+│   ├── data/
+│   ├── layouts/
+│   ├── pages/
+│   ├── styles/
+│   └── utils/
+├── .env.example
+├── .gitignore
+├── .npmrc
+├── astro.config.mjs
+├── eslint.config.mjs
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── README.md
+├── tsconfig.json
+└── dist/
+```
+
+## Cloudflare Pages deployment
+
+Production hosting is Cloudflare Pages for the existing project at `https://yuliux.pages.dev`.
+
+Cloudflare Pages project settings should be configured as follows:
+
+- Production branch: `main`
+- Root directory: `/`
+- Build command: `pnpm run build`
+- Build output directory: `dist`
+- Node.js version: `26.13.0`
+- pnpm version: `12.18.0`
+
+Set the runtime variables in Cloudflare Pages under Settings → Environment variables:
+
+- `NODE_VERSION=26.13.0`
+- `PNPM_VERSION=12.18.0`
+
+The repository’s `.node-version` and `packageManager` fields should match the Cloudflare configuration. Manual dashboard settings may still be required if the Cloudflare project was configured independently from the repo.
+
+## Notes
+
+- This repository intentionally uses standard pnpm and static Astro output.
+- Obsolete Windows-specific custom bootstrapping and GitHub Pages-specific settings have been removed.
+- The existing UI, styling, and functionality were preserved.
