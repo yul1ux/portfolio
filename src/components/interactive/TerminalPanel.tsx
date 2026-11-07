@@ -64,22 +64,22 @@ export default function TerminalPanel() {
       } else if (input === 'whoami') {
         newLogs.push({
           type: 'sys',
-          text: 'Soe Thiha - Cloud Engineer, Infrastructure Architect, Middle-earth explorer.',
+          text: 'Soe Thiha - Cloud Engineer with a network operations background and cloud automation focus.',
         });
       } else if (input === 'stack') {
         newLogs.push({
           type: 'sys',
-          text: 'AWS, Kubernetes, Terraform, Go, Python, Linux, Ansible, Prometheus, Grafana',
+          text: 'AWS, Terraform, Linux, Docker, Kubernetes, GitHub Actions, Git, Python',
         });
       } else if (input === 'status') {
         newLogs.push({
           type: 'sys',
-          text: 'All system nodes operational. Latency: 14ms. High Availability: ACTIVE.',
+          text: 'Current focus: AWS infrastructure, automation, Linux systems, and dependable network operations.',
         });
       } else if (input === 'contact') {
         newLogs.push({
           type: 'sys',
-          text: 'Email: soe.thiha@cloudengineers.dev | GitHub: @soethiha',
+          text: 'Email: soethiha5125@gmail.com | GitHub: @yul1ux',
         });
       } else if (input === 'clear') {
         setCmdLogs([]);
@@ -108,7 +108,7 @@ export default function TerminalPanel() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 text-zinc-400">
-          <span>SYSTEM TERMINAL {'\u00e2\u20ac\u201d'} ACTIVE SESSION</span>
+          <span>SYSTEM TERMINAL — ACTIVE SESSION</span>
           <button
             type="button"
             aria-label="Close cloud terminal"
@@ -120,7 +120,7 @@ export default function TerminalPanel() {
             }}
             className="hover:text-white"
           >
-            {'\u00e2\u0153\u2022'} [ESC]
+            • [ESC]
           </button>
         </div>
         <div

@@ -1,8 +1,10 @@
-﻿---
+---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import About from '../components/home/About.astro';
 import Arsenal from '../components/home/Arsenal.astro';
+import Certifications from '../components/home/Certifications.astro';
 import Contact from '../components/home/Contact.astro';
+import Education from '../components/home/Education.astro';
 import Experience from '../components/home/Experience.astro';
 import Footer from '../components/home/Footer.astro';
 import Header from '../components/home/Header.astro';
@@ -10,7 +12,7 @@ import Hero from '../components/home/Hero.astro';
 import Works from '../components/home/Works.astro';
 import TerminalPanel from '../components/interactive/TerminalPanel';
 const description =
-  'Architecting resilient cloud environments, deterministic pipelines, and self-healing infrastructure with quiet precision.';
+  'Cloud engineer focused on AWS infrastructure, automation, Linux systems, and reliable network architecture.';
 const siteUrl = Astro.site?.href;
 const structuredData = siteUrl
   ? [
@@ -48,6 +50,8 @@ const structuredData = siteUrl
       <Arsenal />
       <Works />
       <Experience />
+      <Education />
+      <Certifications />
       <Contact />
     </main>
     <Footer />
