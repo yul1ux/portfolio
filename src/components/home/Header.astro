@@ -1,12 +1,6 @@
 ---
 import Icon from './Icon.astro';
 import ThemeToggle from '../interactive/ThemeToggle';
-
-interface Props {
-  showTerminal?: boolean;
-}
-
-const { showTerminal = true } = Astro.props;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur-md bg-[#F5F4EF]/80 dark:bg-[#121211]/80 transition-colors duration-500">
@@ -44,22 +38,20 @@ const { showTerminal = true } = Astro.props;
         </a>
       </nav>
 
-      {showTerminal && (
-        <button
-          type="button"
-          data-terminal-toggle
-          aria-label="Toggle Cloud Terminal"
-          aria-controls="cloud-terminal"
-          aria-expanded="false"
-          class="px-2.5 py-1 border border-black/20 dark:border-white/20 hover:border-[#C45533] dark:hover:border-[#C45533] transition-colors flex items-center gap-1.5"
-          title="Toggle Cloud Terminal"
-        >
-          <Icon name="terminal" className="w-3.5 h-3.5 text-[#C45533]" />
-          <span class="hidden xs:inline">CLI</span>
-        </button>
-      )}
+      <button
+        type="button"
+        data-terminal-toggle
+        aria-label="Toggle Cloud Terminal"
+        aria-controls="cloud-terminal"
+        aria-expanded="false"
+        class="px-2.5 py-1 border border-black/20 dark:border-white/20 hover:border-[#C45533] dark:hover:border-[#C45533] transition-colors flex items-center gap-1.5"
+        title="Toggle Cloud Terminal"
+      >
+        <Icon name="terminal" className="w-3.5 h-3.5 text-[#C45533]" />
+        <span class="hidden xs:inline">CLI</span>
+      </button>
 
-      <ThemeToggle client:load />
+      <ThemeToggle client:idle />
     </div>
   </div>
 </header>
