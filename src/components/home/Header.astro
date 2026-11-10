@@ -1,12 +1,18 @@
 ---
 import Icon from './Icon.astro';
 import ThemeToggle from '../interactive/ThemeToggle';
+
+interface Props {
+  showTerminal?: boolean;
+}
+
+const { showTerminal = true } = Astro.props;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur-md bg-[#F5F4EF]/80 dark:bg-[#121211]/80 transition-colors duration-500">
+<header class="fixed top-0 left-0 right-0 z-40 border-b border-black/10 dark:border-white/10 bg-[#F5F4EF] dark:bg-[#121211] transition-colors duration-500">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between font-mono-tech text-xs tracking-wider">
     <div class="flex items-center space-x-3">
-      <span class="w-2.5 h-2.5 rounded-full bg-[#C45533] animate-pulse"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#C45533]"></span>
       <span class="font-semibold uppercase tracking-widest text-sm">
         SOE THIHA
       </span>
@@ -38,18 +44,20 @@ import ThemeToggle from '../interactive/ThemeToggle';
         </a>
       </nav>
 
-      <button
-        type="button"
-        data-terminal-toggle
-        aria-label="Toggle Cloud Terminal"
-        aria-controls="cloud-terminal"
-        aria-expanded="false"
-        class="px-2.5 py-1 border border-black/20 dark:border-white/20 hover:border-[#C45533] dark:hover:border-[#C45533] transition-colors flex items-center gap-1.5"
-        title="Toggle Cloud Terminal"
-      >
-        <Icon name="terminal" className="w-3.5 h-3.5 text-[#C45533]" />
-        <span class="hidden xs:inline">CLI</span>
-      </button>
+      {showTerminal && (
+        <button
+          type="button"
+          data-terminal-toggle
+          aria-label="Toggle Cloud Terminal"
+          aria-controls="cloud-terminal"
+          aria-expanded="false"
+          class="px-2.5 py-1 border border-black/20 dark:border-white/20 hover:border-[#C45533] dark:hover:border-[#C45533] transition-colors flex items-center gap-1.5"
+          title="Toggle Cloud Terminal"
+        >
+          <Icon name="terminal" className="w-3.5 h-3.5 text-[#C45533]" />
+          <span class="hidden xs:inline">CLI</span>
+        </button>
+      )}
 
       <ThemeToggle client:idle />
     </div>
