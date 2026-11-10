@@ -1,5 +1,6 @@
 ﻿---
 import { getCollection, render } from 'astro:content';
+import Header from '../../components/home/Header.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import {
   formatBlogDate,
@@ -59,6 +60,7 @@ const articleStructuredData = {
   structuredData={articleStructuredData}
 >
   <div class="min-h-screen bg-[#F5F4EF] text-[#171717] transition-colors duration-500 dark:bg-[#121211] dark:text-[#E5E4DF]">
+    <Header showTerminal={false} />
     <main id="main-content" class="mx-auto min-h-screen max-w-3xl px-6 py-16">
       <article>
         <nav

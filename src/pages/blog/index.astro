@@ -1,6 +1,7 @@
 ﻿---
 import { getCollection } from 'astro:content';
 import BlogCard from '../../components/blog/BlogCard.astro';
+import Header from '../../components/home/Header.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getPublishedPosts } from '../../utils/blog';
 
@@ -11,6 +12,7 @@ const posts = getPublishedPosts(await getCollection('blog'));
   title="Logs | SOE THIHA — CLOUD ENGINEER"
   description="Technical logs by Soe Thiha."
 >
+  <Header showTerminal={false} />
   <main id="main-content" class="mx-auto min-h-screen max-w-3xl px-6 py-16">
     <header class="mb-12 border-b border-black/10 pb-6 dark:border-white/10">
       <p class="font-mono-tech text-xs uppercase tracking-widest text-black/60 dark:text-white/50">
