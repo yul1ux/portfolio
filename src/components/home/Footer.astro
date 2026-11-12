@@ -1,10 +1,10 @@
-<footer class="border-t border-black/10 dark:border-white/10 py-8 px-6 font-mono-tech text-xs text-black/60 dark:text-white/50">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-    <div>Â© {new Date().getFullYear()} SOE THIHA â€” ALL RIGHTS RESERVED</div>
-    <div class="flex items-center gap-4">
-      <span>SWISS EDITORIAL LAYOUT</span>
-      <span>â€¢</span>
-      <span>BUILT WITH REACT & TAILWIND</span>
-    </div>
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-black/10 px-6 py-8 font-mono-tech text-xs text-black/60 dark:border-white/10 dark:text-white/50">
+  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
+    <p>&copy; {currentYear} SOE THIHA @ ALL RIGHTS RESERVED</p>
+    <p>BUILT WITH ASTRO, REACT &amp; TAILWIND CSS</p>
   </div>
 </footer>
